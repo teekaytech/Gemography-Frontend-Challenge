@@ -5,7 +5,7 @@ import axios from '../../Logic/API'
 import { useState, useEffect } from "react";
 
 
-function RepoList(props) {
+const RepoList = () => {
 
   const [pageUrl, setPageUrl] = useState("/");
   const [RepoList, setRepoList] = useState([]);
@@ -35,8 +35,8 @@ function RepoList(props) {
 
   return (
     <div>
-      {renderError()}
-      {renderRepos}
+      { renderError() }
+      { renderRepos }
     </div>
   );
 }

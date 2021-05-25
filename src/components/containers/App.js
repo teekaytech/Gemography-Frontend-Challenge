@@ -1,4 +1,4 @@
-import '../../stylesheets/App.scss';
+import '../../stylesheets/app.scss';
 import Footer from '../Footer';
 import RepoList from './RepoList';
 
