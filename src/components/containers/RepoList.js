@@ -2,49 +2,56 @@ import React from 'react'
 import Repository from '../Repository'
 import Loading from '../Loading'
 import axios from '../../Logic/API'
-import { useState, useEffect } from "react";
 
+class RepoList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pageUrl: "/",
+      RepoList: [],
+      error: "",
+      loading: false,
+    };
+    this.renderError = this.renderError.bind(this);
+  }
 
-const RepoList = () => {
-
-  const [pageUrl, setPageUrl] = useState("/");
-  const [RepoList, setRepoList] = useState([]);
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
+  componentDidMount() {
     try {
-    const fetchRepos = async (pageUrl) => {
-      const response = await axios.get(pageUrl);
-      setRepoList(response.data.items);
+    const fetchRepos = async () => {
+      const response = await axios.get(this.state.pageUrl);
+      this.setState({
+        RepoList: response.data.items,
+      });
       return true;
     };
     fetchRepos();
-    } catch (error) { setError(error.message) }
-  }, [pageUrl])
+    } catch (error) { this.setError({ error: error.message }); }
+  }
 
-  const renderRepos = RepoList && RepoList.map( repo => <Repository repo={repo} key={repo.id} /> );
-
-  const renderError = () => {
-    if (!error === "") {
-      setLoading(false)
-      return <div className="error">{error}</div>;
+  renderError = () => {
+    if (!this.state.error === "") {
+      this.setState({ loading: false})
+      return <div className="error">{this.state.error}</div>;
     }
   }
 
-  const renderLoading = () => {
-    if (loading || RepoList.length === 0) {
-      return <Loading />;
-    }
-  }
+  render() {
+  const renderRepos =
+    this.state.RepoList &&
+    this.state.RepoList.map((repo) => <Repository repo={repo} key={repo.id} />);
 
-  return (
-    <div>
-      { renderRepos }
-      { renderError() }
-      { renderLoading() }
-    </div>
-  );
+  const renderLoading =
+    this.state.loading ||
+    this.state.RepoList.length === 0 ? (<Loading />) : ('')
+
+    return (
+      <div>
+        {renderRepos}
+        {this.renderError()}
+        {renderLoading}
+      </div>
+    );
+  }
 }
 
 export default RepoList
