@@ -6,8 +6,9 @@ import {axios } from '../../Logic/utils'
 class RepoList extends React.Component {
   constructor(props) {
     super(props);
+    this.myRef = React.createRef();
     this.state = {
-      pageUrl: "&page=120",
+      pageUrl: "&page=12",
       RepoList: [],
       error: "",
       loading: false,
@@ -28,14 +29,14 @@ class RepoList extends React.Component {
         )
         .catch((error) =>
           this.setState({
-            error: error.message,
+            error: `${error.message}: Check your connection`,
             loading: false,
           })
         );
     };
     fetchRepos();
     } catch (error) {
-      this.setState({ error: error, loading: false });
+      this.setState({ error: `Something went wrong: ${error}`, loading: false });
     }
   }
 
@@ -52,11 +53,11 @@ class RepoList extends React.Component {
       : (<div className="error">{this.state.error}</div>);
 
     return (
-      <>
+      <div>
         {renderRepos}
         {renderError}
         {renderLoading}
-      </>
+      </div>
     );
   }
 }
