@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 
 function Repository(props) {
   return (
-    <main>
+    <article>
       Individual Repo
-    </main>
+    </article>
   )
 }
 
