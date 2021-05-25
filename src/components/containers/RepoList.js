@@ -1,37 +1,41 @@
 import React from 'react'
 import Repository from '../Repository'
 import Loading from '../Loading'
-import axios from '../../Logic/API'
+import {axios } from '../../Logic/utils'
 
 class RepoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pageUrl: "/",
+      pageUrl: "&page=120",
       RepoList: [],
       error: "",
       loading: false,
     };
-    this.renderError = this.renderError.bind(this);
   }
 
   componentDidMount() {
     try {
-    const fetchRepos = async () => {
-      const response = await axios.get(this.state.pageUrl);
-      this.setState({
-        RepoList: response.data.items,
-      });
-      return true;
+    this.setState({ loading: true })
+    const fetchRepos = () => {
+      axios
+        .get(this.state.pageUrl)
+        .then((response) =>
+          this.setState({
+            RepoList: response.data.items,
+            loading: false,
+          })
+        )
+        .catch((error) =>
+          this.setState({
+            error: error.message,
+            loading: false,
+          })
+        );
     };
     fetchRepos();
-    } catch (error) { this.setError({ error: error.message }); }
-  }
-
-  renderError = () => {
-    if (!this.state.error === "") {
-      this.setState({ loading: false})
-      return <div className="error">{this.state.error}</div>;
+    } catch (error) {
+      this.setState({ error: error, loading: false });
     }
   }
 
@@ -40,16 +44,19 @@ class RepoList extends React.Component {
     this.state.RepoList &&
     this.state.RepoList.map((repo) => <Repository repo={repo} key={repo.id} />);
 
-  const renderLoading =
-    this.state.loading ||
-    this.state.RepoList.length === 0 ? (<Loading />) : ('')
+  const renderLoading = this.state.loading && (<Loading />)
+
+  const renderError =
+    this.state.error === ""
+      ? ("")
+      : (<div className="error">{this.state.error}</div>);
 
     return (
-      <div>
+      <>
         {renderRepos}
-        {this.renderError()}
+        {renderError}
         {renderLoading}
-      </div>
+      </>
     );
   }
 }
