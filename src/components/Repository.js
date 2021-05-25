@@ -20,13 +20,21 @@ function Repository({ repo }) {
             </span>
         </p>
       </div>
-      {console.log(repo)}
     </article>
   );
 }
 
 Repository.propTypes = {
-  
-}
+  ownner: PropTypes.shape({
+    avatar_url: PropTypes.shape({
+      small: PropTypes.string,
+    }),
+  }),
+  name: PropTypes.string,
+  description: PropTypes.string,
+  stargazers_count: PropTypes.string,
+  open_issues_count: PropTypes.string,
+  created_at: PropTypes.string,
+};
 
 export default Repository

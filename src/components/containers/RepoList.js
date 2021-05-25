@@ -10,6 +10,7 @@ const RepoList = () => {
   const [pageUrl, setPageUrl] = useState("/");
   const [RepoList, setRepoList] = useState([]);
   const [error, setError] = useState("")
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     try {
@@ -22,21 +23,26 @@ const RepoList = () => {
     } catch (error) { setError(error.message) }
   }, [pageUrl])
 
-  const renderRepos = RepoList.length === 0
-    ? ( <Loading /> )
-    : ( RepoList.map( repo => <Repository repo={repo} key={repo.id} /> )
-  );
+  const renderRepos = RepoList && RepoList.map( repo => <Repository repo={repo} key={repo.id} /> );
 
   const renderError = () => {
     if (!error === "") {
+      setLoading(false)
       return <div className="error">{error}</div>;
+    }
+  }
+
+  const renderLoading = () => {
+    if (loading || RepoList.length === 0) {
+      return <Loading />;
     }
   }
 
   return (
     <div>
-      { renderError() }
       { renderRepos }
+      { renderError() }
+      { renderLoading() }
     </div>
   );
 }
