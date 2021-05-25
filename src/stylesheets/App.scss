@@ -1,10 +1,18 @@
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.App {
+  &__header {
+    text-align: center;
+  }
+
+  &__main {
+    margin: auto 3rem;
+    font-size: 1.4rem;
+  }
+
+  &__footer {
+    text-align: center;
+    position: fixed;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+  }
 }
