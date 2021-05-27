@@ -16,4 +16,10 @@ const daysDiff = (first, second = new Date()) => {
   return Math.round((second - first) / oneDay);
 };
 
-export { axios, daysDiff }
+const fetchNextPage = (page) =>  {
+  return Axios.get(
+    `https://api.github.com/search/repositories?q=created:>${dateAgo}&sort=stars&order=desc${page}`
+  ).then( (response) => response.data);
+}
+
+export { axios, daysDiff, fetchNextPage }

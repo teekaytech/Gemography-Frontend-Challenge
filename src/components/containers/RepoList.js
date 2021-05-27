@@ -1,63 +1,100 @@
 import React from 'react'
 import Repository from '../Repository'
 import Loading from '../Loading'
-import {axios } from '../../Logic/utils'
+import { axios, fetchNextPage } from "../../Logic/utils";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 class RepoList extends React.Component {
   constructor(props) {
     super(props);
-    this.myRef = React.createRef();
     this.state = {
-      pageUrl: "&page=12",
-      RepoList: [],
+      page: "",
+      Repos: [],
       error: "",
       loading: false,
+      currentPage: 1,
+      hasMore: true
     };
   }
 
   componentDidMount() {
     try {
-    this.setState({ loading: true })
-    const fetchRepos = () => {
-      axios
-        .get(this.state.pageUrl)
-        .then((response) =>
-          this.setState({
-            RepoList: response.data.items,
-            loading: false,
-          })
-        )
-        .catch((error) =>
-          this.setState({
-            error: `${error.message}: Check your connection`,
-            loading: false,
-          })
-        );
-    };
-    fetchRepos();
+      this.fetchRepos(this.state.page);
     } catch (error) {
-      this.setState({ error: `Something went wrong: ${error}`, loading: false });
+      this.setState({
+        error: `Something went wrong: ${error}`,
+        loading: false,
+      });
     }
   }
 
+  fetchRepos = (page) => {
+    this.setState({ loading: true });
+    axios
+      .get(page)
+      .then((response) =>
+        this.setState({
+          Repos: response.data.items,
+          loading: false,
+        }))
+      .catch((error) =>
+        this.setState({
+          error: `${error.message}: Try again.`,
+          loading: false,
+        }));
+  };
+
+  setNextPage = () => {
+    const setNew = parseInt(this.state.currentPage) + 1
+    const next = "&page=" + setNew;
+    this.setState({ currentPage: setNew, page: next })
+  }
+
+  updateState = (res) => {
+    const { Repos, error } = this.state;
+    if (Array.isArray(res)) {
+      const repos = [...Repos, ...res];
+      this.setState({ Repos: repos });
+    } else if (error === "") {
+      this.setState({ hasMore: false });
+    }
+    return Repos;
+  }
+
+  fetchNextRepos = async () => {
+    this.setNextPage();
+    const result = await fetchNextPage(this.state.page)
+      .then((response) => response.items)
+      .catch((error) => `Something went wrong: ${error.message}`);
+    return this.updateState(result);
+  }
+
   render() {
-  const renderRepos =
-    this.state.RepoList &&
-    this.state.RepoList.map((repo) => <Repository repo={repo} key={repo.id} />);
-
-  const renderLoading = this.state.loading && (<Loading />)
-
-  const renderError =
-    this.state.error === ""
-      ? ("")
-      : (<div className="error">{this.state.error}</div>);
+    const { Repos, loading, error, hasMore } = this.state;
+    const renderLoading = loading && <Loading />;
+    const renderError = error === "" ? ("") : (<div className="error">{error}</div>);
 
     return (
-      <div>
-        {renderRepos}
+      <>
         {renderError}
         {renderLoading}
-      </div>
+        <div>
+          <InfiniteScroll
+            dataLength={Repos.length}
+            next={this.fetchNextRepos}
+            hasMore={hasMore}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }
+          >
+            {Repos.map((repo, key) => (
+              <Repository repo={repo} key={key} />
+            ))}
+          </InfiniteScroll>
+        </div>
+      </>
     );
   }
 }
