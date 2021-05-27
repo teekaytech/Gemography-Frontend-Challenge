@@ -70,19 +70,18 @@ class RepoList extends React.Component {
   }
 
   render() {
-    const { Repos, loading, error, hasMore } = this.state;
-    const renderLoading = loading && <Loading />;
+    const { Repos, error, hasMore } = this.state;
     const renderError = error === "" ? ("") : (<div className="error">{error}</div>);
 
     return (
       <>
         {renderError}
-        {renderLoading}
         <div>
           <InfiniteScroll
             dataLength={Repos.length}
             next={this.fetchNextRepos}
             hasMore={hasMore}
+            loader={<Loading />}
             endMessage={
               <p style={{ textAlign: "center" }}>
                 <b>Yay! You have seen it all</b>
