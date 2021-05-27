@@ -1,4 +1,4 @@
-import '../stylesheets/footer.scss'
+import '../stylesheets/footer.scss';
 
 function Footer() {
   return (
@@ -17,4 +17,4 @@ function Footer() {
   );
 }
 
-export default Footer
+export default Footer;

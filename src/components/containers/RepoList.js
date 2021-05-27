@@ -1,51 +1,39 @@
-import React from 'react'
-import Repository from '../Repository'
-import Loading from '../Loading'
-import { fetchPage } from "../../Logic/utils";
+import React from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Repository from '../Repository';
+import Loading from '../Loading';
+import { fetchPage } from '../../Logic/utils';
 
 class RepoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: "",
       Repos: [],
-      error: "",
-      loading: false,
+      error: '',
       currentPage: 1,
-      hasMore: true
+      hasMore: true,
     };
   }
 
   componentDidMount() {
     try {
-      this.setState({ loading: true });
-      const fetchRepos = async (page) => {
-        await fetchPage(page)
-          .then((response) =>
-            this.setState({
-              Repos: response.items,
-              loading: false,
-            }))
-          .catch((error) =>
-            this.setState({
-              error: `${error.message}: Try again.`,
-              loading: false,
-            }));
+      const fetchRepos = async () => {
+        await fetchPage()
+          .then((response) => this.setState({ Repos: response.items }))
+          .catch((error) => this.setState({ error: `${error.message}: Try again.` }));
       };
       fetchRepos();
     } catch (error) {
-      this.setState({
-        error: `Something went wrong: ${error}`,
-        loading: false,
-      });
+      this.setState({ error: `Something went wrong: ${error}` });
     }
   }
 
   setNextPage = () => {
-    const setNew = parseInt(this.state.currentPage) + 1
-    const next = "&page=" + setNew;
-    this.setState({ currentPage: setNew, page: next })
+    const { currentPage } = this.state;
+    const setNew = parseInt(currentPage, 10) + 1;
+    const next = `&page=${setNew}`;
+    this.setState({ currentPage: setNew });
+    return next;
   }
 
   updateState = (res) => {
@@ -53,15 +41,15 @@ class RepoList extends React.Component {
     if (Array.isArray(res)) {
       const repos = [...Repos, ...res];
       this.setState({ Repos: repos });
-    } else if (error === "") {
+    } else if (error === '') {
       this.setState({ hasMore: false });
     }
     return Repos;
   }
 
   fetchNextRepos = async () => {
-    this.setNextPage();
-    const result = await fetchPage(this.state.page)
+    const page = this.setNextPage();
+    const result = await fetchPage(page)
       .then((response) => response.items)
       .catch((error) => `Something went wrong: ${error.message}`);
     return this.updateState(result);
@@ -69,7 +57,7 @@ class RepoList extends React.Component {
 
   render() {
     const { Repos, error, hasMore } = this.state;
-    const renderError = error === "" ? ("") : (<div className="error">{error}</div>);
+    const renderError = error === '' ? ('') : (<div className="error">{error}</div>);
     return (
       <>
         {renderError}
@@ -79,14 +67,14 @@ class RepoList extends React.Component {
             next={this.fetchNextRepos}
             hasMore={hasMore}
             loader={<Loading />}
-            endMessage={
-              <p style={{ textAlign: "center" }}>
+            endMessage={(
+              <p style={{ textAlign: 'center' }}>
                 <b>Yay! You have seen it all</b>
               </p>
-            }
+            )}
           >
-            {Repos.map((repo, key) => (
-              <Repository repo={repo} key={key} />
+            {Repos.map((repo) => (
+              <Repository repo={repo} key={repo.id} />
             ))}
           </InfiniteScroll>
         </div>
@@ -95,4 +83,4 @@ class RepoList extends React.Component {
   }
 }
 
-export default RepoList
+export default RepoList;

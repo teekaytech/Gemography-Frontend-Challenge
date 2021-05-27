@@ -1,5 +1,5 @@
 import '../stylesheets/loading.scss';
-import ReactLoading from "react-loading";
+import ReactLoading from 'react-loading';
 
 function Loading() {
   return (
@@ -14,4 +14,4 @@ function Loading() {
   );
 }
 
-export default Loading
+export default Loading;
