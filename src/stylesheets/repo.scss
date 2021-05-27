@@ -1,0 +1,49 @@
+.Repo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 3rem 10rem;
+  box-shadow: 10px 10px 5px 0 rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 10px 5px 0 rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0 rgba(0, 0, 0, 0.75);
+
+  &__avatar {
+    width: 15%;
+    height: auto;
+    margin: 0.5rem;
+    text-align: center;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+    }
+  }
+
+  &__details {
+    width: 80%;
+    padding: 0.5rem 1rem 0.5rem 0;
+
+    .name {
+      font-size: 1.6rem;
+      margin: 0.5rem 0;
+    }
+
+    .desc,
+    .meta {
+      margin: 1.1rem 0;
+      font-size: 1.2rem;
+    }
+
+    .meta {
+      padding-top: 1rem;
+
+      &__stars,
+      &__issues {
+        border: 0.2rem solid black;
+        padding: 0.35rem 0.5rem;
+        margin-right: 1.5rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.App {
+  &__header {
+    text-align: center;
+  }
+
+  &__main {
+    margin: auto 3rem;
+    min-height: 85vh;
+    font-size: 1.4rem;
+  }
+
+  &__footer {
+    text-align: center;
+  }
+}
