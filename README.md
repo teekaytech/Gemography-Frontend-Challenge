@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# Starred GitHub Repositories
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> A small webapp that lists the most starred Github repos that were created in the last 30 days from [GitHub Public API](https://api.github.com/) into React state. The JSON data fetched directly from the API is rendered to the users. As teh user keeps scrolling, new results are automatically fetched and rendered to the user.
 
-## Available Scripts
+![First Screenshot here...](src/screenshots/page-one.png)
 
-In the project directory, you can run:
+## Built With
 
-### `yarn start`
+- SCSS (BEM structure)
+- npm & ES6
+- React (Create-React-App)
+- [`Infinite Scroll`](https://www.npmjs.com/package/react-infinite-scroll-component) & [`react-loading`](src/screenshots/page-one.png) NPM packages.
+- ESLint & StyleLint
+- [![Netlify Status](https://api.netlify.com/api/v1/badges/03c97479-2368-45a4-8ce5-f71b4d657569/deploy-status)](https://app.netlify.com/sites/gemo-starred-repos/deploys)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Live Demo
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+[Starred Repositories](gemo-starred-repos.netlify.app)
 
-### `yarn test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**To Clone and get a local copy up and running follow these simple example steps.**
 
-### `yarn build`
+- On the project GitHub page, navigate to the main page of the repository: [this page](https://github.com/teekaytech/Gemography-Frontend-Challenge).
+- Under the repository name, locate and click on a green button named `Code`.
+- Copy the project URL (under `HTTPS`)as displayed.
+- If you're running Windows Operating System, open your command prompt. On Linux, Open your terminal.
+- Change the current working directory to the location where you want the cloned directory to be made. Leave as it is if the current location is where you want the project to be.
+- Type `git clone`, and then paste the URL you copied in Step 3.<br>
+  `$ git clone https://github.com/teekaytech/Gemography-Frontend-Challenge.git` <em>Press Enter key</em><br>
+- Press Enter. Your local copy will be created.
+- Checkout to the development branch with: `git checkout development`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Please Note that you must have github installed on your PC, this can be done
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Making Changes / Running the app locally
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Run `npm install` to install the dependencies and packages
+- Run `npm start` to test the app before or after changes were made
 
-### `yarn eject`
+### Prerequisites
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [Git](https://gist.github.com/derhuerst/1b15ff4652a867391f03).
+- Web browser (Chrome/Firefox)
+- [Node](https://nodejs.org/en/)
+- [NPM](https://www.npmjs.com/get-npm)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Click on the live demo link and peruse the app.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Author
 
-## Learn More
+👤 **Taofeek Olalere**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Github: [@teekaytech](https://github.com/teekaytech)
+- Twitter: [@ola_lere](https://twitter.com/ola_lere)
+- Linkedin: [olaleretaofeek](https://linkedin.com/in/olaleretaofeek)
+- Portfolio: [Olalere Taofeek](https://teekaytech.github.io/olaleretaofeek/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🤝 Contributing
 
-### Code Splitting
+Contributions, issues and feature requests are welcome!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Feel free to check the [issues page](https://github.com/teekaytech/Gemography-Frontend-Challenge/issues).
 
-### Analyzing the Bundle Size
+## Show your support
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Give a ⭐️ if you like this project!
 
-### Making a Progressive Web App
+## Acknowledgments
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- [create-react-app boilerplate from Facebook team](https://github.com/facebook/create-react-app)
+- [Netlify](https://app.netlify.com/)
+- [CSS Modules](https://css-tricks.com/css-modules-part-1-need/)
 
-### Advanced Configuration
+## 📝 License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is [MIT](/LICENSE) licensed.
