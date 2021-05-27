@@ -18,4 +18,4 @@ const fetchPage = (page = "") =>  {
   ).then( (response) => response.data);
 }
 
-export { daysDiff, fetchPage };
+export { getDate, daysDiff, fetchPage };
