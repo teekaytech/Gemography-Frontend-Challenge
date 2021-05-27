@@ -15,7 +15,7 @@
 
 ## Live Demo
 
-[Starred Repositories](gemo-starred-repos.netlify.app)
+[Starred Repositories](https://gemo-starred-repos.netlify.app)
 
 ## Getting Started
 
