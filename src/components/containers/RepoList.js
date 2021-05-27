@@ -1,7 +1,7 @@
 import React from 'react'
 import Repository from '../Repository'
 import Loading from '../Loading'
-import { axios, fetchNextPage } from "../../Logic/utils";
+import { fetchPage } from "../../Logic/utils";
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 class RepoList extends React.Component {
@@ -19,7 +19,21 @@ class RepoList extends React.Component {
 
   componentDidMount() {
     try {
-      this.fetchRepos(this.state.page);
+      this.setState({ loading: true });
+      const fetchRepos = async (page) => {
+        await fetchPage(page)
+          .then((response) =>
+            this.setState({
+              Repos: response.items,
+              loading: false,
+            }))
+          .catch((error) =>
+            this.setState({
+              error: `${error.message}: Try again.`,
+              loading: false,
+            }));
+      };
+      fetchRepos();
     } catch (error) {
       this.setState({
         error: `Something went wrong: ${error}`,
@@ -27,22 +41,6 @@ class RepoList extends React.Component {
       });
     }
   }
-
-  fetchRepos = (page) => {
-    this.setState({ loading: true });
-    axios
-      .get(page)
-      .then((response) =>
-        this.setState({
-          Repos: response.data.items,
-          loading: false,
-        }))
-      .catch((error) =>
-        this.setState({
-          error: `${error.message}: Try again.`,
-          loading: false,
-        }));
-  };
 
   setNextPage = () => {
     const setNew = parseInt(this.state.currentPage) + 1
@@ -63,7 +61,7 @@ class RepoList extends React.Component {
 
   fetchNextRepos = async () => {
     this.setNextPage();
-    const result = await fetchNextPage(this.state.page)
+    const result = await fetchPage(this.state.page)
       .then((response) => response.items)
       .catch((error) => `Something went wrong: ${error.message}`);
     return this.updateState(result);
@@ -72,7 +70,6 @@ class RepoList extends React.Component {
   render() {
     const { Repos, error, hasMore } = this.state;
     const renderError = error === "" ? ("") : (<div className="error">{error}</div>);
-
     return (
       <>
         {renderError}
