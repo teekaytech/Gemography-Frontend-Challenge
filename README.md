@@ -9,7 +9,7 @@
 - SCSS (BEM structure)
 - npm & ES6
 - React (Create-React-App)
-- [`Infinite Scroll`](https://www.npmjs.com/package/react-infinite-scroll-component) & [`react-loading`](src/screenshots/page-one.png) NPM packages.
+- [`Infinite Scroll`](https://www.npmjs.com/package/react-infinite-scroll-component) & [`react-loading`](https://www.npmjs.com/package/react-loading) NPM packages.
 - ESLint & StyleLint
 - [![Netlify Status](https://api.netlify.com/api/v1/badges/03c97479-2368-45a4-8ce5-f71b4d657569/deploy-status)](https://app.netlify.com/sites/gemo-starred-repos/deploys)
 
@@ -26,8 +26,7 @@
 - Copy the project URL (under `HTTPS`)as displayed.
 - If you're running Windows Operating System, open your command prompt. On Linux, Open your terminal.
 - Change the current working directory to the location where you want the cloned directory to be made. Leave as it is if the current location is where you want the project to be.
-- Type `git clone`, and then paste the URL you copied in Step 3.<br>
-  `$ git clone https://github.com/teekaytech/Gemography-Frontend-Challenge.git` <em>Press Enter key</em><br>
+- Type `git clone`, and then paste thesrc/screenshots/page-one.pngaytech/Gemography-Frontend-Challenge.git` <em>Press Enter key</em><br>
 - Press Enter. Your local copy will be created.
 - Checkout to the development branch with: `git checkout development`
 
@@ -72,7 +71,8 @@ Give a ⭐️ if you like this project!
 
 - [create-react-app boilerplate from Facebook team](https://github.com/facebook/create-react-app)
 - [Netlify](https://app.netlify.com/)
-- [CSS Modules](https://css-tricks.com/css-modules-part-1-need/)
+- [Infinite Scroll](https://www.npmjs.com/package/react-infinite-scroll-component)
+- [React Loading](https://www.npmjs.com/package/react-loading)
 
 ## 📝 License
 
